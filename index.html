@@ -1,66 +1,99 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Infinity Cubes</title>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <link rel="stylesheet" href="css/style.css">
 
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<header>
+<nav class="navbar navbar-expand-lg navbar-dark glass-nav">
 
-<div class="logo">
+<div class="container">
 
+<a class="navbar-brand fw-bold" href="#">
 🧩 Infinity Cubes
+</a>
+
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="nav">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="index.html">Home</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="shop.html">Shop</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="custom.html">Custom Prints</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="login.html">Login</a>
+
+</li>
+
+</ul>
 
 </div>
 
-<nav>
-
-<a href="#">Home</a>
-
-<a href="shop.html">Shop</a>
-
-<a href="custom.html">Custom Prints</a>
-
-<a href="login.html">Login</a>
+</div>
 
 </nav>
 
-</header>
-
 <section class="hero">
 
-<div class="hero-text">
+<div class="container">
 
-<h1>
+<div class="row align-items-center">
 
-3D Printing Made Easy.
+<div class="col-lg-6">
+
+<h1 class="display-3 fw-bold">
+
+3D Printing<br>
+
+Made Simple
 
 </h1>
 
-<p>
+<p class="lead">
 
-Custom designs.
-Infinity Cubes.
-Professional quality.
+Premium Infinity Cubes and completely custom 3D prints.
 
 </p>
 
 <a href="shop.html">
 
-<button>
+<button class="btn btn-main">
 
 Start Shopping
 
@@ -70,67 +103,69 @@ Start Shopping
 
 </div>
 
-<div class="hero-image">
+<div class="col-lg-6 text-center">
 
-<img
-src="images/cube.png"
-alt="Infinity Cube">
+<img src="images/cube.png" class="hero-img">
+
+</div>
+
+</div>
 
 </div>
 
 </section>
 
-<section class="features">
+<section class="container py-5">
 
-<div class="card">
+<div class="row g-4">
 
-<h2>
+<div class="col-md-4">
 
-🚀 Fast Printing
+<div class="feature-card">
 
-</h2>
+<h2>🚀</h2>
 
-<p>
+<h4>Fast Printing</h4>
 
-Quick turnaround.
-
-</p>
+<p>Quick turnaround for every order.</p>
 
 </div>
 
-<div class="card">
+</div>
 
-<h2>
+<div class="col-md-4">
 
-🎨 Custom Colours
+<div class="feature-card">
 
-</h2>
+<h2>🎨</h2>
 
-<p>
+<h4>Custom Colours</h4>
 
-Choose any colour.
-
-</p>
+<p>Choose exactly how you want it.</p>
 
 </div>
 
-<div class="card">
+</div>
 
-<h2>
+<div class="col-md-4">
 
-⭐ Premium Quality
+<div class="feature-card">
 
-</h2>
+<h2>⭐</h2>
 
-<p>
+<h4>Premium Quality</h4>
 
-High quality PLA.
+<p>High-quality prints every time.</p>
 
-</p>
+</div>
+
+</div>
 
 </div>
 
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 <script type="module" src="js/script.js"></script>
 
