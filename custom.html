@@ -1,1 +1,167 @@
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Custom Prints | Infinity Cubes</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark glass-nav">
+
+<div class="container">
+
+<a class="navbar-brand" href="index.html">
+
+🧩 Infinity Cubes
+
+</a>
+
+<div class="ms-auto">
+
+<a href="shop.html" class="btn btn-light">
+
+Back to Shop
+
+</a>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container py-5">
+
+<h1 class="text-center mb-5">
+
+Custom 3D Printing
+
+</h1>
+
+<div class="glass p-4">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>Name</label>
+
+<input
+id="customName"
+class="form-control mb-3"
+type="text">
+
+<label>Email</label>
+
+<input
+id="customEmail"
+class="form-control mb-3"
+type="email">
+
+<label>Delivery Address</label>
+
+<textarea
+id="customAddress"
+class="form-control mb-3"></textarea>
+
+<label>Colour</label>
+
+<select
+id="customColour"
+class="form-select mb-3">
+
+<option>Black</option>
+<option>White</option>
+<option>Red</option>
+<option>Blue</option>
+<option>Green</option>
+<option>Pink</option>
+<option>Purple</option>
+
+</select>
+
+</div>
+
+<div class="col-md-6">
+
+<label>Material</label>
+
+<select
+id="customMaterial"
+class="form-select mb-3">
+
+<option>PLA</option>
+<option>PETG</option>
+<option>TPU (Flexible)</option>
+
+</select>
+
+<label>Estimated Print Time (Half Hours)</label>
+
+<input
+id="printTime"
+type="number"
+min="1"
+value="1"
+class="form-control mb-3"
+oninput="updateCustomPrice()">
+
+<label>Describe Your Print</label>
+
+<textarea
+id="customDescription"
+class="form-control mb-3"
+rows="5"></textarea>
+
+<label>Special Requirements</label>
+
+<textarea
+id="specialRequirements"
+class="form-control mb-3"
+rows="3"></textarea>
+
+<h3>
+
+Estimated Price
+
+£<span id="customPrice">
+
+0.50
+
+</span>
+
+</h3>
+
+<button
+class="btn btn-success w-100 mt-3"
+onclick="submitCustomRequest()">
+
+Submit Request
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module" src="js/script.js"></script>
+
+</body>
+
+</html>
+```
