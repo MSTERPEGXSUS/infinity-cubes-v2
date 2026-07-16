@@ -1,102 +1,285 @@
-
-console.log("Infinity Cubes V2 Loaded");
-
-const cards = document.querySelectorAll(".card");
-
-cards.forEach(card=>{
-
-card.addEventListener("mouseenter",()=>{
-
-card.style.transform="translateY(-10px)";
-
-});
-
-card.addEventListener("mouseleave",()=>{
-
-card.style.transform="translateY(0px)";
-
-});
-
-});
-
 ```javascript
-// --------------------------
-// CUSTOM PRINT PRICE
-// --------------------------
+// ================================
+// Infinity Cubes V2
+// script.js
+// ================================
 
-window.updateCustomPrice=function(){
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-const halfHours=
+window.addCubeToCart = addCubeToCart;
+window.removeItem = removeItem;
+window.placeOrder = placeOrder;
+window.updateCustomPrice = updateCustomPrice;
+window.submitCustomRequest = submitCustomRequest;
 
-parseInt(
+document.addEventListener("DOMContentLoaded", () => {
+    updateCart();
+    if (document.getElementById("printTime")) {
+        updateCustomPrice();
+    }
+});
 
-document.getElementById("printTime").value
+// --------------------
+// ADD TO CART
+// --------------------
 
-)||1;
+function addCubeToCart() {
 
-const total=
+    const colour = document.getElementById("cubeColour").value;
 
-halfHours*0.5;
+    const quantity = parseInt(document.getElementById("cubeQuantity").value);
 
-document.getElementById("customPrice").innerHTML=
+    if (quantity < 1) {
+        alert("Quantity must be at least 1.");
+        return;
+    }
 
-total.toFixed(2);
+    cart.push({
+        name: "Infinity Cube",
+        colour,
+        quantity,
+        price: quantity * 1
+    });
+
+    saveCart();
+
+    alert("Added to cart!");
+}
+
+// --------------------
+// SAVE CART
+// --------------------
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+}
+
+// --------------------
+// UPDATE CART
+// --------------------
+
+function updateCart() {
+
+    const cartItems = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cartCount");
+    const totalPrice = document.getElementById("totalPrice");
+
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+    }
+
+    if (!cartItems) return;
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = "<p>Your cart is empty.</p>";
+
+        if (totalPrice) totalPrice.textContent = "0.00";
+
+        return;
+
+    }
+
+    let html = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+
+        total += item.price;
+
+        html += `
+        <div class="order-card">
+
+            <h4>${item.name}</h4>
+
+            <p>🎨 ${item.colour}</p>
+
+            <p>📦 Quantity: ${item.quantity}</p>
+
+            <h5>£${item.price.toFixed(2)}</h5>
+
+            <button
+            class="btn btn-danger"
+            onclick="removeItem(${index})">
+
+            Remove
+
+            </button>
+
+        </div>
+        `;
+
+    });
+
+    cartItems.innerHTML = html;
+
+    if (totalPrice) {
+
+        totalPrice.textContent = total.toFixed(2);
+
+    }
 
 }
 
-// --------------------------
+// --------------------
+// REMOVE ITEM
+// --------------------
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    saveCart();
+
+}
+
+// --------------------
+// ORDER NUMBER
+// --------------------
+
+function generateOrderNumber() {
+
+    const today = new Date();
+
+    const year = String(today.getFullYear()).slice(-2);
+
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+
+    const day = String(today.getDate()).padStart(2, "0");
+
+    const random = Math.floor(Math.random() * 9000 + 1000);
+
+    return `IC-${year}${month}${day}-${random}`;
+
+}
+
+// --------------------
+// PLACE ORDER
+// --------------------
+
+function placeOrder() {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+
+    }
+
+    const name = document.getElementById("customerName").value.trim();
+    const email = document.getElementById("customerEmail").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
+    const delivery = document.getElementById("deliveryMethod").value;
+    const notes = document.getElementById("orderNotes").value;
+
+    if (!name || !email || !address) {
+
+        alert("Please complete all required fields.");
+
+        return;
+
+    }
+
+    const order = {
+
+        orderNumber: generateOrderNumber(),
+
+        name,
+
+        email,
+
+        address,
+
+        delivery,
+
+        notes,
+
+        cart,
+
+        total: cart.reduce((sum, item) => sum + item.price, 0),
+
+        status: "Pending",
+
+        date: new Date().toLocaleString()
+
+    };
+
+    console.log(order);
+
+    alert(
+`Order placed!
+
+Order Number:
+
+${order.orderNumber}`
+    );
+
+    cart = [];
+
+    saveCart();
+
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerEmail").value = "";
+    document.getElementById("customerAddress").value = "";
+    document.getElementById("orderNotes").value = "";
+
+}
+
+// --------------------
+// CUSTOM PRINT PRICE
+// --------------------
+
+function updateCustomPrice() {
+
+    const input = document.getElementById("printTime");
+
+    if (!input) return;
+
+    const halfHours = parseInt(input.value) || 1;
+
+    const price = halfHours * 0.5;
+
+    document.getElementById("customPrice").textContent = price.toFixed(2);
+
+}
+
+// --------------------
 // CUSTOM REQUEST
-// --------------------------
+// --------------------
 
-window.submitCustomRequest=function(){
+function submitCustomRequest() {
 
-const request={
+    const request = {
 
-name:
+        name: document.getElementById("customName").value,
 
-document.getElementById("customName").value,
+        email: document.getElementById("customEmail").value,
 
-email:
+        address: document.getElementById("customAddress").value,
 
-document.getElementById("customEmail").value,
+        colour: document.getElementById("customColour").value,
 
-address:
+        material: document.getElementById("customMaterial").value,
 
-document.getElementById("customAddress").value,
+        printTime: document.getElementById("printTime").value,
 
-colour:
+        description: document.getElementById("customDescription").value,
 
-document.getElementById("customColour").value,
+        requirements: document.getElementById("specialRequirements").value,
 
-material:
+        price: document.getElementById("customPrice").textContent,
 
-document.getElementById("customMaterial").value,
+        status: "Pending",
 
-description:
+        date: new Date().toLocaleString()
 
-document.getElementById("customDescription").value,
+    };
 
-requirements:
+    console.log(request);
 
-document.getElementById("specialRequirements").value,
-
-halfHours:
-
-document.getElementById("printTime").value,
-
-price:
-
-document.getElementById("customPrice").innerHTML
-
-};
-
-console.log(request);
-
-alert(
-
-"Custom request submitted! Firebase integration is next."
-
-);
+    alert("Custom request submitted! Firebase integration is coming next.");
 
 }
 ```
